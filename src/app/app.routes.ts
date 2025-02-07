@@ -3,12 +3,14 @@
   import { RegisterComponent } from './auth/register/register.component';
   import {LoginComponent} from "./auth/login/login.component";
   import {ProfileComponent} from "./profile/profile.component";
+  import {EditProfileComponent} from "./profile/edit-profile/edit-profile.component";
 
   export const routes: Routes = [
     { path: 'register', component: RegisterComponent },
     { path: 'login', component: LoginComponent },
     { path: 'profile', component: ProfileComponent },
-    { path: '', redirectTo: 'register', pathMatch: 'full' },
+    { path: 'profile/edit', component: EditProfileComponent }, // Edit profile route
+    { path: '', redirectTo: 'login', pathMatch: 'full' },
   ];
 
   @NgModule({
