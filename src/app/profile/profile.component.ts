@@ -36,4 +36,16 @@ export class ProfileComponent implements OnInit {
       this.router.navigate(['/auth/login']); // Redirect to login page
     }
   }
+
+  navigateToSubmitRequest() {
+    this.router.navigate(['/collection/submit']); // Navigate to Submit Request page
+  }
+
+  navigateToMyRequests() {
+    this.router.navigate(['/collection/my-requests']); // Navigate to My Requests page
+  }
+
+  navigateToCollectorDashboard() {
+    this.router.navigate(['/collection/dashboard']); // Navigate to Collector Dashboard
+  }
 }
