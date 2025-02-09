@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
+import { v4 as uuidv4 } from 'uuid';
+
 
 
 @Component({
@@ -28,7 +30,9 @@ export class SubmitRequestComponent {
 
   onSubmit() {
     if (this.requestForm.valid) {
-      const request = { FirstName: this.currentUser.firstName,
+      const request = {
+        id: uuidv4(),
+        FirstName: this.currentUser.firstName,
         SecondName: this.currentUser.lastName,
         email: this.currentUser.email,
         phone: this.currentUser.phone,
