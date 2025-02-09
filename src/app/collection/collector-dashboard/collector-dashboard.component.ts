@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+
 
 
 @Component({
@@ -7,7 +9,7 @@ import { ReactiveFormsModule } from '@angular/forms';
   templateUrl: './collector-dashboard.component.html',
   styleUrls: ['./collector-dashboard.component.scss'],
   standalone: true,
-  imports: [ReactiveFormsModule]
+  imports: [ReactiveFormsModule , CommonModule]
 })
 export class CollectorDashboardComponent implements OnInit {
   allRequests: any[] = [];
@@ -20,10 +22,8 @@ export class CollectorDashboardComponent implements OnInit {
     const requestIndex = this.allRequests.findIndex((req: any) => req.id === requestId);
 
     if (requestIndex !== -1) {
-      // Update the status of the request
       this.allRequests[requestIndex].status = newStatus;
 
-      // Save updated requests back to localStorage
       localStorage.setItem('requests', JSON.stringify(this.allRequests));
 
       alert(`Request ${newStatus} successfully!`);
