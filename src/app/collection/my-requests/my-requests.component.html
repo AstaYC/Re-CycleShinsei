@@ -4,7 +4,8 @@
       <h1 class="text-3xl font-bold mb-8">My Requests</h1>
       <div *ngIf="userRequests.length > 0; else noRequests">
         <div *ngFor="let request of userRequests" class="mb-6 p-4 border rounded shadow-sm">
-          <p><strong>Name:</strong> {{ request.name }}</p>
+          <p><strong>Fist Name:</strong> {{ request.FirstName }}</p>
+          <p><strong>Last Name:</strong> {{ request.SecondName }}</p>
           <p><strong>Email:</strong> {{ request.email }}</p>
           <p><strong>Phone:</strong> {{ request.phone }}</p>
           <p><strong>Waste Type:</strong> {{ request.wasteType }}</p>
