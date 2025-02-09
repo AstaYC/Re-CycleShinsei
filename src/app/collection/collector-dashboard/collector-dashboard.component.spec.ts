@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { CollectorDashboardComponent } from './collector-dashboard.component';
 
 describe('CollectorDashboardComponent', () => {
@@ -11,7 +10,7 @@ describe('CollectorDashboardComponent', () => {
       imports: [CollectorDashboardComponent]
     })
     .compileComponents();
-    
+
     fixture = TestBed.createComponent(CollectorDashboardComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

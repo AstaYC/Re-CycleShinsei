@@ -39,17 +39,19 @@ export class RegisterComponent {
   }
 
   onSubmit() {
-    alert(`Form is valid: ${!this.registerForm.invalid}`); // Debugging alert
+    alert(`Form is valid: ${!this.registerForm.invalid}`);
     if (this.registerForm.valid) {
       const userData = { ...this.registerForm.value, role: 'particulier' };
 
-      // Save user data to localStorage
+      if (userData.email === 'collector@gmail.com') {
+        userData.role = 'collecteur';
+      }
       let users = JSON.parse(localStorage.getItem('users') || '[]');
       users.push(userData);
       localStorage.setItem('users', JSON.stringify(users));
 
       alert('Registration successful!');
-      this.registerForm.reset(); // Clear the form after registration
+      this.registerForm.reset();
     }
   }
 }
