@@ -2,37 +2,56 @@
   <div class="h-screen flex justify-center items-center">
     <div class="bg-white mx-4 p-8 rounded shadow-md w-full md:w-2/3 lg:w-1/2 text-center">
       <h1 class="text-3xl font-bold mb-8">Collector Dashboard</h1>
-      <div *ngIf="allRequests.length > 0; else noRequests">
-        <div *ngFor="let request of allRequests" class="mb-6 p-4 border rounded shadow-sm">
+
+      <div class="mb-6">
+        <label class="block font-semibold text-gray-700 mb-2">Filter by Status</label>
+        <select
+          class="border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          [(ngModel)]="filterStatus" (change)="applyFilter()">
+          <option value="all">All</option>
+          <option value="En attente">Pending</option>
+          <option value="Occupée">Occupied</option>
+          <option value="En cours">In Progress</option>
+          <option value="Validée">Validated</option>
+          <option value="Rejetée">Rejected</option>
+        </select>
+      </div>
+
+      <div *ngIf="filteredRequests.length > 0; else noRequests">
+        <div *ngFor="let request of filteredRequests" class="mb-6 p-4 border rounded shadow-sm">
           <p><strong>Name:</strong> {{ request.name }}</p>
           <p><strong>Email:</strong> {{ request.email }}</p>
           <p><strong>Phone:</strong> {{ request.phone }}</p>
-          <p><strong>Waste Type:</strong> {{ request.wasteType }}</p>
-          <p><strong>Quantity:</strong> {{ request.quantity }} kg</p>
           <p><strong>Address:</strong> {{ request.address }}</p>
           <p><strong>Collection Date:</strong> {{ request.collectionDate }}</p>
+          <p><strong>Total Weight:</strong> {{ request.totalWeight }} kg</p>
           <p><strong>Status:</strong> {{ request.status }}</p>
           <div class="mt-4 space-x-2">
             <button
               class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
-              (click)="updateRequestStatus(request.id, 'accepted')">
-              Accept
+              (click)="updateRequestStatus(request.id, 'Occupée')">
+              Mark as Occupied
             </button>
             <button
-              class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
-              (click)="updateRequestStatus(request.id, 'rejected')">
-              Reject
+              class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded"
+              (click)="updateRequestStatus(request.id, 'En cours')">
+              Mark as In Progress
             </button>
             <button
               class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-              (click)="updateRequestStatus(request.id, 'validated')">
+              (click)="updateRequestStatus(request.id, 'Validée')">
               Validate
+            </button>
+            <button
+              class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+              (click)="updateRequestStatus(request.id, 'Rejetée')">
+              Reject
             </button>
           </div>
         </div>
       </div>
       <ng-template #noRequests>
-        <p class="text-gray-500">There are no pending requests.</p>
+        <p class="text-gray-500">There are no requests matching the selected filter.</p>
       </ng-template>
     </div>
   </div>

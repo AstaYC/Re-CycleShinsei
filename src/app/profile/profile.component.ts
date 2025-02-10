@@ -1,51 +1,34 @@
-import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import {Router} from "@angular/router"; // Import CommonModule
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss'],
   standalone: true,
-  imports:[CommonModule]
+  imports: [] // Add CommonModule if needed
 })
-export class ProfileComponent implements OnInit {
+export class ProfileComponent {
   currentUser: any;
+  redeemedVouchers: number = 0;
 
-  constructor(private router: Router) {}
-
-  ngOnInit() {
+  constructor() {
     this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
+
+    const vouchers = JSON.parse(localStorage.getItem('vouchers') || '{}');
+    this.redeemedVouchers = vouchers[this.currentUser.email] || 0;
   }
 
-  navigateToEditProfile() {
-    this.router.navigate(['/profile/edit']);
-  }
+  redeemPoints(voucherType: string) {
+    const vouchers = {
+      '100': 100,
+      '200': 200,
+      '500': 500
+    };
 
-  deleteAccount() {
-    if (confirm('Are you sure you want to delete your account?')) {
-      // Remove the user from localStorage
+    const requiredPoints = vouchers[voucherType];
+
+    if (this.currentUser.points >= requiredPoints) {
+      this.currentUser.points -= requiredPoints;
+
       let users = JSON.parse(localStorage.getItem('users') || '[]');
-      users = users.filter((u: any) => u.email !== this.currentUser.email);
-      localStorage.setItem('users', JSON.stringify(users));
-
-      // Clear the current user session
-      localStorage.removeItem('currentUser');
-
-      alert('Account deleted successfully!');
-      this.router.navigate(['/auth/login']); // Redirect to login page
-    }
-  }
-
-  navigateToSubmitRequest() {
-    this.router.navigate(['/collection/submit']); // Navigate to Submit Request page
-  }
-
-  navigateToMyRequests() {
-    this.router.navigate(['/collection/my-requests']); // Navigate to My Requests page
-  }
-
-  navigateToCollectorDashboard() {
-    this.router.navigate(['/collection/dashboard']); // Navigate to Collector Dashboard
-  }
-}
+      const userIndex =

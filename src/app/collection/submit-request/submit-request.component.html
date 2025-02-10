@@ -1,66 +1,37 @@
 <div class="bg-cover bg-center bg-fixed" style="background-image: url('https://picsum.photos/1920/1080')">
   <div class="h-screen flex justify-center items-center">
-    <div class="bg-white mx-4 p-8 rounded shadow-md w-full md:w-1/2 lg:w-1/3">
-      <h1 class="text-3xl font-bold mb-8 text-center">Submit Collection Request</h1>
+    <div class="bg-white mx-4 p-8 rounded shadow-md w-full md:w-1/2 lg:w-1/3 text-center">
+      <h1 class="text-3xl font-bold mb-8">Submit Collection Request</h1>
       <form [formGroup]="requestForm" (ngSubmit)="onSubmit()">
-        <!-- Waste Type -->
         <div class="mb-4">
-          <label class="block font-semibold text-gray-700 mb-2" for="wasteType">Waste Type</label>
-          <select
-            class="border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="wasteType" formControlName="wasteType">
+          <label class="block font-semibold text-gray-700 mb-2">Waste Type</label>
+          <select formControlName="wasteType" class="border rounded w-full py-2 px-3">
             <option value="">Select Waste Type</option>
             <option value="Plastic">Plastic</option>
+            <option value="Glass">Glass</option>
             <option value="Paper">Paper</option>
             <option value="Metal">Metal</option>
-            <option value="Glass">Glass</option>
           </select>
-          <div *ngIf="requestForm.get('wasteType')?.invalid && requestForm.get('wasteType')?.touched" class="text-red-500 text-sm mt-1">
-            Please select a waste type.
-          </div>
         </div>
 
-        <!-- Quantity -->
         <div class="mb-4">
-          <label class="block font-semibold text-gray-700 mb-2" for="quantity">Quantity (kg)</label>
-          <input
-            class="border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="quantity" type="number" placeholder="Enter quantity" formControlName="quantity" />
-          <div *ngIf="requestForm.get('quantity')?.invalid && requestForm.get('quantity')?.touched" class="text-red-500 text-sm mt-1">
-            Please enter a valid quantity (minimum 1 kg).
-          </div>
+          <label class="block font-semibold text-gray-700 mb-2">Quantity (kg)</label>
+          <input formControlName="quantity" type="number" placeholder="Enter quantity" class="border rounded w-full py-2 px-3" />
         </div>
 
-        <!-- Address -->
         <div class="mb-4">
-          <label class="block font-semibold text-gray-700 mb-2" for="address">Address</label>
-          <input
-            class="border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="address" type="text" placeholder="Enter your address" formControlName="address" />
-          <div *ngIf="requestForm.get('address')?.invalid && requestForm.get('address')?.touched" class="text-red-500 text-sm mt-1">
-            Address is required.
-          </div>
+          <label class="block font-semibold text-gray-700 mb-2">Address</label>
+          <input formControlName="address" type="text" placeholder="Enter your address" class="border rounded w-full py-2 px-3" />
         </div>
 
-        <!-- Collection Date -->
         <div class="mb-4">
-          <label class="block font-semibold text-gray-700 mb-2" for="collectionDate">Preferred Collection Date</label>
-          <input
-            class="border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="collectionDate" type="date" formControlName="collectionDate" />
-          <div *ngIf="requestForm.get('collectionDate')?.invalid && requestForm.get('collectionDate')?.touched" class="text-red-500 text-sm mt-1">
-            Please select a collection date.
-          </div>
+          <label class="block font-semibold text-gray-700 mb-2">Preferred Collection Date</label>
+          <input formControlName="collectionDate" type="date" class="border rounded w-full py-2 px-3" />
         </div>
 
-        <!-- Submit Button -->
-        <div class="mb-6">
-          <button
-            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full"
-            type="submit" [disabled]="requestForm.invalid">
-            Submit Request
-          </button>
-        </div>
+        <button type="submit" class="bg-green-500 text-white py-2 px-4 rounded w-full" [disabled]="requestForm.invalid">
+          Submit Request
+        </button>
       </form>
     </div>
   </div>
